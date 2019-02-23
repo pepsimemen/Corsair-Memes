@@ -14,7 +14,7 @@ const PYRE_SOUTH_ID 			= 3
 module.exports = function CorsairMemes (dispatch) {		
 	const command = dispatch.command;	
 	let config = require('./config.json');
-	config.instantLadderThresholdPercent = Math.min(99, Math.max(0, Math.floor(config.instantLadderThresholdPercent))); // recommend setting this at or below 95 to avoid any funny behaviours/animations at the top of the ladder.	
+	config.instantClimbThreshold = Math.min(99, Math.max(0, Math.floor(config.instantClimbThreshold))); // recommend setting this at or below 95 to avoid any funny behaviours/animations at the top of the ladder.	
 	let currentZone = -1;
 	let myGameId = -1;	
 	let stopAtZ = undefined;
@@ -26,7 +26,7 @@ module.exports = function CorsairMemes (dispatch) {
 	dispatch.hook('S_LOAD_TOPO', 3, (event) => {
 		currentZone = event.zone;
 		if (event.zone == CORSAIRS_BG_ZONE) {
-			logMessage(`Welcome to corsair-memes! Instant-ladder is currently ${config.instantLadder ? 'enabled' : 'disabled'} with threshold of ${config.instantLadderThresholdPercent}`, true);
+			logMessage(`Welcome to corsair-memes! Instant-ladder is currently ${config.instantClimb ? 'enabled' : 'disabled'} with threshold of ${config.instantClimbThreshold}`, true);
 		}
 	});
 	
@@ -37,9 +37,9 @@ module.exports = function CorsairMemes (dispatch) {
 	
 	// :PepeHappy:
 	dispatch.hook('C_BROADCAST_CLIMBING', 1, (event) => {		
-		if (config.instantLadder && event.z >= stopAtZ) {
+		if (config.instantClimb && event.z >= stopAtZ) {
 			// Server will reply S_INSTANT_MOVE (to the destination location) in return, which will move character to the top of the ladder in a standing free-to-move position. 
-			// Note: if instantLadderThresholdPercent is set really high (97%-99%) then your character will still perform the "getting up" animation - however you can freely cast
+			// Note: if instantClimbThreshold is set really high (97%-99%) then your character will still perform the "getting up" animation - however you can freely cast
 			// skills or move (after jumping) at this point.
 			if (climbDestination == undefined){
 				logMessage(`Undefined climbing destination. Abort instant-climb.`)
@@ -49,7 +49,7 @@ module.exports = function CorsairMemes (dispatch) {
 				w: climbingW
 			});			
 			blockClimbing = true;
-			setTimeout(clearBlockClimbing, config.ladderDesyncDelay); // ~2 seconds should be fine for most people, but to be safe set this to double your usual/average ping, at a MINIMUM.
+			setTimeout(clearBlockClimbing, 3000); // ~3 seconds should be fine for most people, this should be at least double the user's average ping.
 		}
 		// Hmmm
 		if (blockClimbing) {
@@ -60,19 +60,19 @@ module.exports = function CorsairMemes (dispatch) {
 	// :PepePoggers:
 	dispatch.hook('S_START_CLIMBING', 1, (event) => {
 		resetClimbingState();
-		if (config.instantLadder && myGameId == event.gameId) {
+		if (config.instantClimb && myGameId == event.gameId) {
 			// Store the destination, angle, instant-threshold data for assessment when hooking C_BROADCAST_CLIMBING. 
 			climbDestination = event.dest;
 			climbingW = event.w;
-			stopAtZ = Math.floor(event.loc.z + ((event.dest.z - event.loc.z) * (config.instantLadderThresholdPercent / 100)));						
-			logMessage(`Climb started! Instant-finishing at ${config.instantLadderThresholdPercent}% up the ladder!`)
+			stopAtZ = Math.floor(event.loc.z + ((event.dest.z - event.loc.z) * (config.instantClimbThreshold / 100)));						
+			logMessage(`Climb started! Instant-finishing at ${config.instantClimbThreshold}% up the ladder!`)
 		}
 	});
 	
 	// :PepeTired:
 	dispatch.hook('C_END_CLIMBING', 2, (event) => {
 		// Prevent the client from sending a naturally-generated C_END_CLIMBING packet, between the time it takes for the server to reply with S_INSTANT_MOVE after C_END_CLIMBING packet was crafted. 2x ping tax.
-		// IMPORTANT: if however you still end up with a climbing animation because you set instantLadderThresholdPercent configuration setting too close to 100 (anything above 95, really), then you will still be able
+		// IMPORTANT: if however you still end up with a climbing animation because you set instantClimbThreshold configuration setting too close to 100 (anything above 95, really), then you will still be able
 		// to jump & cast skills during the animation (which will break you out of the animation), but you will not be able to move normally using WASD keys until the animation ends (or you break it with a skill).
 		if (blockClimbing){
 			teleport(climbDestination, false);
@@ -96,12 +96,12 @@ module.exports = function CorsairMemes (dispatch) {
 		switch (arg1) {
 			case 'instantclimb':
 				if (arg2 != undefined && isNumber(arg2)){
-					config.instantLadderThresholdPercent = Math.min(99, Math.max(0, Math.floor(arg2))); 
+					config.instantClimbThreshold = Math.min(99, Math.max(0, Math.floor(arg2))); 
 				}
 				else{					
-					config.instantLadder = !config.instantLadder;
+					config.instantClimb = !config.instantClimb;
 				}
-				logMessage(`Instant-ladder climbing is now ${config.instantLadder ? 'enabled' : 'disabled'}. Instant threshold of ${config.instantLadderThresholdPercent}%.`);
+				logMessage(`Instant-ladder climbing is now ${config.instantClimb ? 'enabled' : 'disabled'}. Instant threshold of ${config.instantClimbThreshold}%.`);
 				break;
 			// Crystal room locations. :hue:
 			case 'crystalback':

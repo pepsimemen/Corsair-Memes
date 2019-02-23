@@ -3,19 +3,19 @@
 By: Cattalol
 
 This Tera-Proxy QoL module allows you to:
-- Insta-magically finish ladder climbings without a locked animation at the end (height-configurable).
-- Teleport into the crystal room at your whim
-- Magically capture pyres from anywhere on the map.
+- Instantly finish ladder climbing (without a locked animation at the end), upon reaching the configured percentage (e.g. 90% up the ladder).
+- Teleport to various locations within the defending crystal room with a single command.
+- Magically capture pyres from anywhere on the map (functionally a "battleground capper").
 
 ## Proxy compatibility:
-- Tested on Caali's proxy only on NA.
+- Tested on Caali's proxy only.
 
 ## Setup:
 - Copy/paste all .def files from the protocol folder inside `<path to proxy>\node_modules\tera-data\protocol\`.
 - Copy/paste the opcodes (as appropriate to your region) from the map folder into the corresponding .map file within `<path to proxy>\node_modules\tera-data\map\`.
   - C_BROADCAST_CLIMBING
   - C_BATTLE_FIELD_START_OCCUPATION
-	- Note: if opcodes are not provided for your region (and patch), you can always try logging them yourself with https://github.com/Owyn/alex-packet-id-finder or https://github.com/Owyn/PacketsLogger.
+	- Note: if opcodes are not provided for your region (and patch), you can log them yourself with tools such as https://github.com/Owyn/alex-packet-id-finder or https://github.com/Owyn/PacketsLogger.
 - Enjoy the memes!
 
 ## Commands (in the proxy channel):
@@ -23,8 +23,9 @@ This Tera-Proxy QoL module allows you to:
 - If no percentage is given, toggles instant ladder climbing on/off. 
 - If percentage is given, this sets the **percentage height at which you will be automatically teleported to the top of the ladder**. For any value above 95, you will probably encounter a minor desync, in which you will go through
 the finish-climbing-animation (and unable to use WASD to move freely), but you will be free to jump or cast skills (in which case the animation breaks and you will have full freedom of movement immediately).
-   - Example: *instantclimb 50* will finish your climb when you're halfway up the ladder, 
-   - Example: *instantclimb 0* will instant-finish your climb as soon as you begin to climb up.
+   - Example: *csmemes instantclimb 99* will finish your climb when you're at the top of the ladder, with a client-sided animation that you can get out of with any skill or jump.
+   - Example: *csmemes instantclimb 50* will finish your climb when you're halfway up the ladder, 
+   - Example: *csmemes instantclimb 0* will instant-finish your climb as soon as you begin to climb up.
 ### csmemes crystalback
 - Teleports behind the crystal (anchorstone) in the defending castle.
 ### csmemes crystalfront
@@ -42,3 +43,8 @@ the finish-climbing-animation (and unable to use WASD to move freely), but you w
 ### csmemes capsouth
 - Begin capturing the **South Pyre**.
 
+## Config.json properties:
+### instantClimb [true/false]
+- If true, enables instant climbing.
+### instantClimbThreshold [0-99]
+- How far up the ladder (in %) before instantly finishing your climb.
