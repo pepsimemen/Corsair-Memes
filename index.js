@@ -26,7 +26,7 @@ module.exports = function CorsairMemes (dispatch) {
 	dispatch.hook('S_LOAD_TOPO', 3, (event) => {
 		currentZone = event.zone;
 		if (event.zone == CORSAIRS_BG_ZONE) {
-			logMessage(`Welcome to corsair-memes! Instant-ladder is currently ${config.instantClimb ? 'enabled' : 'disabled'} with threshold of ${config.instantClimbThreshold}`, true);
+			logMessage(`Welcome to corsair-memes! Instant-climbing ladders is currently ${config.instantClimb ? 'enabled' : 'disabled'} with threshold of ${config.instantClimbThreshold}%.`);
 		}
 	});
 	
@@ -39,8 +39,7 @@ module.exports = function CorsairMemes (dispatch) {
 	dispatch.hook('C_BROADCAST_CLIMBING', 1, (event) => {		
 		if (config.instantClimb && event.z >= stopAtZ) {
 			// Server will reply S_INSTANT_MOVE (to the destination location) in return, which will move character to the top of the ladder in a standing free-to-move position. 
-			// Note: if instantClimbThreshold is set really high (97%-99%) then your character will still perform the "getting up" animation - however you can freely cast
-			// skills or move (after jumping) at this point.
+			// Note: if instantClimbThreshold is set really high (97%-99%), your character will still perform a client-sided "getting up" animation - you can freely cast skills / jump at this point to break the animation.
 			if (climbDestination == undefined){
 				logMessage(`Undefined climbing destination. Abort instant-climb.`)
 			}			
@@ -96,6 +95,7 @@ module.exports = function CorsairMemes (dispatch) {
 		switch (arg1) {
 			case 'instantclimb':
 				if (arg2 != undefined && isNumber(arg2)){
+					// Clamp the user-input between 0 and 99. :PepeGlare:
 					config.instantClimbThreshold = Math.min(99, Math.max(0, Math.floor(arg2))); 
 				}
 				else{					
