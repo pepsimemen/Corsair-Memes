@@ -1,0 +1,5 @@
+{
+	"instantLadder" : true,
+	"instantLadderThresholdPercent": 90,
+	"ladderDesyncDelay": 2000
+}
