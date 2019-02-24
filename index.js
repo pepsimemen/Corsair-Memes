@@ -1,15 +1,15 @@
-const CORSAIRS_BG_ZONE 			= 116
+const CORSAIRS_BG_ZONE 		= 116
 const LOCATION_CRYSTAL_BACK 	= {	x: 13131, y: 120654, z: 2134 }
 const LOCATION_CRYSTAL_FRONT 	= { x: 12878, y: 120365, z: 2134 }
-const LOCATION_LEFT_CANNON 		= { x: 12896, y: 120082, z: 2113 }
+const LOCATION_LEFT_CANNON 	= { x: 12896, y: 120082, z: 2113 }
 const LOCATION_RIGHT_CANNON 	= { x: 12399, y: 120440, z: 2110 }
 const LOCATION_INNER_GATE_BACK	= { x: 11811, y: 119358, z: 2121 }
-const LOCATION_PYRE_NORTH		= { x: 11149, y: 113126, z: 1900 }
-const LOCATION_PYRE_MID			= { x: 10228, y: 117796, z: 2688 }
-const LOCATION_PYRE_SOUTH		= { x: 5338, y: 118544, z: 1884 }
-const PYRE_MID_ID 				= 1
-const PYRE_NORTH_ID 			= 2
-const PYRE_SOUTH_ID 			= 3
+const LOCATION_PYRE_NORTH	= { x: 11149, y: 113126, z: 1900 }
+const LOCATION_PYRE_MID		= { x: 10228, y: 117796, z: 2688 }
+const LOCATION_PYRE_SOUTH	= { x: 5338, y: 118544, z: 1884 }
+const PYRE_MID_ID 		= 1
+const PYRE_NORTH_ID 		= 2
+const PYRE_SOUTH_ID 		= 3
 
 module.exports = function CorsairMemes (dispatch) {		
 	const command = dispatch.command;	
