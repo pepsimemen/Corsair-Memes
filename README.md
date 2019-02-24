@@ -43,6 +43,12 @@ the finish-climbing-animation (and unable to use WASD to move freely), but you w
 - Begin capturing the **Middle Pyre**.
 ### csmemes capsouth
 - Begin capturing the **South Pyre**.
+### csmemes northpyre
+- Teleport beside the **North Pyre**.
+### csmemes midpyre
+- Teleport beside the **Mid Pyre**.
+### csmemes southpyre
+- Teleport beside the **South Pyre**.
 
 ## Config.json properties:
 ### instantClimb [true/false]
