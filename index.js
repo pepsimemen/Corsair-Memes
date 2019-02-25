@@ -42,6 +42,7 @@ module.exports = function CorsairMemes (dispatch) {
 			// Note: if instantClimbThreshold is set really high (97%-99%), your character will still perform a client-sided "getting up" animation - you can freely cast skills / jump at this point to break the animation.
 			if (climbDestination == undefined){
 				logMessage(`Undefined climbing destination. Abort instant-climb.`)
+				return;
 			}			
 			dispatch.toServer('C_END_CLIMBING', 2, {
 				loc: climbDestination,
