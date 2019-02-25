@@ -32,17 +32,23 @@ the finish-climbing-animation (and unable to use WASD to move freely), but you w
 ### csmemes crystalfront
 - Teleports in front of the crystal (anchorstone) in the defending castle.
 ### csmemes leftcannon
-- Teleports beside the **left cannon**.
+- Teleports beside the **left cannon** in the crystal room.
 ### csmemes rightcannon
-- Teleports beside the **right cannon**.
+- Teleports beside the **right cannon** in the crystal room.
 ### csmemes innergate
-- Teleports behind the **Inner Gate**.
+- Teleports *behind* the **Inner Gate**.
 ### csmemes capnorth
 - Begin capturing the **North Pyre**.
 ### csmemes capmid
 - Begin capturing the **Middle Pyre**.
 ### csmemes capsouth
 - Begin capturing the **South Pyre**.
+### csmemes northpyre
+- Teleport beside the **North Pyre**.
+### csmemes midpyre
+- Teleport beside the **Mid Pyre**.
+### csmemes southpyre
+- Teleport beside the **South Pyre**.
 
 ## Config.json properties:
 ### instantClimb [true/false]
