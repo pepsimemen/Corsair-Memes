@@ -19,8 +19,77 @@ module.exports = function CorsairMemes (dispatch) {
 	let myGameId = -1;	
 	let stopAtZ = undefined;
 	let climbDestination = undefined;
-	let climbingW = undefined
-	let blockClimbing = false
+	let climbingW = undefined;
+	let blockClimbing = false;
+	
+	// :PepeThenk:
+	command.add('csmemes', (arg1, arg2) => {
+		if (arg1 != undefined){
+			arg1 = arg1.toLowerCase();		
+		}
+		else{
+			logMessage(`Welcome to Corsair-memes!`)
+			printGetHelp();
+			return;
+		}
+		switch (arg1) {
+			case 'instantclimb':
+				if (arg2 != undefined && isNumber(arg2)){
+					// Clamp the user-input between 0 and 99. :PepeGlare:
+					config.instantClimbThreshold = Math.min(99, Math.max(0, Math.floor(arg2))); 
+				}
+				else{					
+					config.instantClimb = !config.instantClimb;
+				}
+				logMessage(`Instant-ladder climbing is now ${config.instantClimb ? 'enabled' : 'disabled'}. Instant threshold of ${config.instantClimbThreshold}%.`);
+				break;
+			// Crystal room locations. :hue:
+			case 'crystalback':
+				teleport(LOCATION_CRYSTAL_BACK);
+				break;
+			case 'crystalfront':			
+				teleport(LOCATION_CRYSTAL_FRONT);
+				break;
+			case 'leftcannon':
+				teleport(LOCATION_LEFT_CANNON);
+				break;
+			case 'rightcannon':
+				teleport(LOCATION_RIGHT_CANNON);
+				break;
+			case 'innergate':
+				teleport(LOCATION_INNER_GATE_BACK);
+				break;
+			// Various pyre locations.
+			case 'northpyre':	
+				teleport(LOCATION_PYRE_NORTH);
+				break;
+			case 'midpyre':
+				teleport(LOCATION_PYRE_MID);
+				break;
+			case 'southpyre':
+				teleport(LOCATION_PYRE_SOUTH);
+				break;
+			// Who's a good boy? Definitely not you! :Evil:
+			case 'capnorth':
+				capPyre(PYRE_NORTH_ID);
+				break;
+			case 'capmid':
+				capPyre(PYRE_MID_ID);
+				break;
+			case 'capsouth':
+				capPyre(PYRE_SOUTH_ID);
+				break;
+			// QoL :)
+			case 'help':
+				printHelp();
+				break;
+			default:			
+				logMessage(`Invalid command.`);
+				printGetHelp();
+				break;
+		}
+	});
+	
 	
 	// Get the current zone ID (so we know if/when we enter the battleground).
 	dispatch.hook('S_LOAD_TOPO', 3, (event) => {
@@ -84,68 +153,6 @@ module.exports = function CorsairMemes (dispatch) {
 		}
 	});
 	
-	// :PepeThenk:
-	command.add('csmemes', (arg1, arg2) => {
-		if (arg1 != undefined){
-			arg1 = arg1.toLowerCase();		
-		}
-		else{
-			logMessage(`Welcome to Corsair-memes! Please refer to the README for the list of command arguments. Thankyou for your co-operation.`)
-			return;
-		}
-		switch (arg1) {
-			case 'instantclimb':
-				if (arg2 != undefined && isNumber(arg2)){
-					// Clamp the user-input between 0 and 99. :PepeGlare:
-					config.instantClimbThreshold = Math.min(99, Math.max(0, Math.floor(arg2))); 
-				}
-				else{					
-					config.instantClimb = !config.instantClimb;
-				}
-				logMessage(`Instant-ladder climbing is now ${config.instantClimb ? 'enabled' : 'disabled'}. Instant threshold of ${config.instantClimbThreshold}%.`);
-				break;
-			// Crystal room locations. :hue:
-			case 'crystalback':
-				teleport(LOCATION_CRYSTAL_BACK);
-				break;
-			case 'crystalfront':			
-				teleport(LOCATION_CRYSTAL_FRONT);
-				break;
-			case 'leftcannon':
-				teleport(LOCATION_LEFT_CANNON);
-				break;
-			case 'rightcannon':
-				teleport(LOCATION_RIGHT_CANNON);
-				break;
-			case 'innergate':
-				teleport(LOCATION_INNER_GATE_BACK);
-				break;
-			// Various pyre locations.
-			case 'northpyre':	
-				teleport(LOCATION_PYRE_NORTH);
-				break;
-			case 'midpyre':
-				teleport(LOCATION_PYRE_MID);
-				break;
-			case 'southpyre':
-				teleport(LOCATION_PYRE_SOUTH);
-				break;
-			// Who's a good boy? Definitely not you! :Evil:
-			case 'capnorth':
-				capPyre(PYRE_NORTH_ID);
-				break;
-			case 'capmid':
-				capPyre(PYRE_MID_ID);
-				break;
-			case 'capsouth':
-				capPyre(PYRE_SOUTH_ID);
-				break;
-			default:			
-				logMessage(`Invalid command. Please refer to the README for the list of command arguments. Thankyou for your co-operation.`);		
-				break;
-		}
-	});
-	
 	// :MonkaWorry:
 	function clearBlockClimbing() {
 		blockClimbing = false;
@@ -196,5 +203,29 @@ module.exports = function CorsairMemes (dispatch) {
 			console.log(`[Corsair-Memes] ${msg}`);
 		}
 		command.message(msg);
+	}
+	
+	// :PepeZzZ:
+	function printGetHelp() {
+		logMessage(`For a descriptive list of commands: \n  - Type "csmemes help" (without the quotes) or, \n  - Refer to the README. \nThankyou for your co-operation.`)
+	}
+	
+	// :PepeYawns:
+	function printHelp() {
+		let message;
+		message += `Command list:`;
+		message += `\n\t* csmemes instantclimb (toggle enable/disable instant climb)`;
+		message += `\n\t* csmemes instantclimb [1-99] (set the instant-climb threshold)`;
+		message += `\n\t* csmemes crystalback (Teleport behind the anchorstone)`;
+		message += `\n\t* csmemes crystalfront (Teleport in front of the anchorstone)`;
+		message += `\n\t* csmemes leftcannon (Teleport beside the left cannon by the anchorstone)`;
+		message += `\n\t* csmemes rightcannon (Teleport beside the right cannon by the anchorstone)`;
+		message += `\n\t* csmemes capnorth (Cap the North pyre from anywhere on the map)`;
+		message += `\n\t* csmemes capmid (Cap the Middle pyre from anywhere on the map)`;
+		message += `\n\t* csmemes capsouth (Cap the South pyre from anywhere on the map)`;
+		message += `\n\t* csmemes northpyre (Teleport beside the North Pyre)`;
+		message += `\n\t* csmemes midpyre (Teleport beside the Middle Pyre)`;
+		message += `\n\t* csmemes southpyre (Teleport beside the South Pyre)`;
+		logMessage(message);
 	}
 }

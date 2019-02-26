@@ -20,6 +20,8 @@ This Tera-Proxy QoL module allows you to:
 - Enjoy the memes!
 
 ## Commands (in the proxy channel):
+### csmemes help
+- Prints (in the proxy channel, and in the proxy console) the list of available commands for this mod.
 ### csmemes instantclimb [percentage - optional]
 - If no percentage is given, toggles instant ladder climbing on/off. 
 - If percentage is given, this sets the **percentage height at which you will be automatically teleported to the top of the ladder**. For any value above 95, you will probably encounter a minor desync, in which you will go through
