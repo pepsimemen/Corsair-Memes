@@ -9,7 +9,10 @@ This Tera-Proxy QoL module allows you to:
 
 ## Proxy compatibility:
 - Tested on Caali's proxy only.
-- Opcodes provided for **NA** and **EU** for patch **79.07**.
+- Opcodes provided for patch **79.07**:
+  - **NA** (protocol 344300)
+  - **EU** (protocol 344301)
+  - **TH/SEA** (protocol 344305) (partial list; pyre-capping-anywhere will not work unless you supply your own C_BATTLE_FIELD_START_OCCUPATION opcode).
 
 ## Setup:
 - Copy/paste all .def files from the protocol folder inside `<path to proxy>\node_modules\tera-data\protocol\`.
