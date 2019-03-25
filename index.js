@@ -1,19 +1,22 @@
-const CORSAIRS_BG_ZONE 		= 116
-const LOCATION_CRYSTAL_BACK 	= { x: 13131, y: 120654, z: 2134 }
-const LOCATION_CRYSTAL_FRONT 	= { x: 12878, y: 120365, z: 2134 }
-const LOCATION_LEFT_CANNON 	= { x: 12896, y: 120082, z: 2113 }
-const LOCATION_RIGHT_CANNON 	= { x: 12399, y: 120440, z: 2110 }
-const LOCATION_INNER_GATE_BACK	= { x: 11811, y: 119358, z: 2121 }
-const LOCATION_PYRE_NORTH	= { x: 11149, y: 113126, z: 1900 }
-const LOCATION_PYRE_MID		= { x: 10228, y: 117796, z: 2688 }
-const LOCATION_PYRE_SOUTH	= { x: 5338, y: 118544, z: 1884 }
-const PYRE_MID_ID 		= 1
-const PYRE_NORTH_ID 		= 2
-const PYRE_SOUTH_ID 		= 3
+const fs                        = require('fs');
+const path                      = require('path');
+const configJsonPath            = path.resolve(__dirname,'config.json');
+const CORSAIRS_BG_ZONE          = 116
+const LOCATION_CRYSTAL_BACK     = { x: 13131, y: 120654, z: 2134 }
+const LOCATION_CRYSTAL_FRONT    = { x: 12878, y: 120365, z: 2134 }
+const LOCATION_LEFT_CANNON      = { x: 12896, y: 120082, z: 2113 }
+const LOCATION_RIGHT_CANNON     = { x: 12399, y: 120440, z: 2110 }
+const LOCATION_INNER_GATE_BACK  = { x: 11811, y: 119358, z: 2121 }
+const LOCATION_PYRE_NORTH       = { x: 11149, y: 113126, z: 1900 }
+const LOCATION_PYRE_MID         = { x: 10228, y: 117796, z: 2688 }
+const LOCATION_PYRE_SOUTH       = { x: 5338, y: 118544, z: 1884 }
+const PYRE_MID_ID               = 1
+const PYRE_NORTH_ID             = 2
+const PYRE_SOUTH_ID             = 3
 
 module.exports = function CorsairMemes (dispatch) {		
 	const command = dispatch.command;	
-	let config = require('./config.json');
+	let config = loadJson(configJsonPath);	
 	config.instantClimbThreshold = Math.min(99, Math.max(0, Math.floor(config.instantClimbThreshold))); // recommend setting this at or below 95 to avoid any funny behaviours/animations at the top of the ladder.	
 	let currentZone = -1;
 	let myGameId = -1;	
@@ -42,6 +45,7 @@ module.exports = function CorsairMemes (dispatch) {
 					config.instantClimb = !config.instantClimb;
 				}
 				logMessage(`Instant-ladder climbing is now ${config.instantClimb ? 'enabled' : 'disabled'}. Instant threshold of ${config.instantClimbThreshold}%.`);
+				saveJson(config, configJsonPath);
 				break;
 			// Crystal room locations. :hue:
 			case 'crystalback':
@@ -106,6 +110,9 @@ module.exports = function CorsairMemes (dispatch) {
 	
 	// :PepeHappy:
 	dispatch.hook('C_BROADCAST_CLIMBING', 1, (event) => {		
+		if (blockClimbing) {
+			return false;
+		}
 		if (config.instantClimb && event.z >= stopAtZ) {
 			// Server will reply S_INSTANT_MOVE (to the destination location) in return, which will move character to the top of the ladder in a standing free-to-move position. 
 			// Note: if instantClimbThreshold is set really high (97%-99%), your character will still perform a client-sided "getting up" animation - you can freely cast skills / jump at this point to break the animation.
@@ -118,11 +125,7 @@ module.exports = function CorsairMemes (dispatch) {
 				w: climbingW
 			});			
 			blockClimbing = true;
-			setTimeout(clearBlockClimbing, 3000); // ~3 seconds should be fine for most people, this should be at least double the user's average ping.
-		}
-		// Hmmm
-		if (blockClimbing) {
-			return false;
+			setTimeout(clearBlockClimbing, 2000); // ~2 seconds should be fine for most people, this should be at least double the user's average ping.
 		}
 	});
 	
@@ -227,5 +230,33 @@ module.exports = function CorsairMemes (dispatch) {
 		message += `\n\t* csmemes midpyre (Teleport beside the Middle Pyre)`;
 		message += `\n\t* csmemes southpyre (Teleport beside the South Pyre)`;
 		logMessage(message);
+	}
+	
+	function loadJson(filePath){
+		try {
+			let data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+			if (!data){
+				logMessage(`Error loading JSON at ${filePath}`, true)				
+			}
+			else{
+				logMessage(`Loaded data from JSON at ${filePath}`, true)
+			}
+			return data ? data : {};
+		}
+		catch (err) {
+			logMessage(`Error loading JSON at ${filePath}!`, true)
+			return {}
+		}
+	}
+	
+	function saveJson(data, path) {
+		fs.writeFile(path, JSON.stringify(data, null, '\t'), 'utf8', function (err) {
+			if (!err){
+				logMessage(`The JSON at ${path} has been successfully updated.`, true)
+			}
+			else{
+				logMessage(`Error writing to ${path}!`, true)
+			}
+		});
 	}
 }

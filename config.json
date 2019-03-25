@@ -1,4 +1,4 @@
 {
-	"instantClimb" : true,
-	"instantClimbThreshold": 90
+	"instantClimb": true,
+	"instantClimbThreshold": 85
 }
