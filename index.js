@@ -16,7 +16,7 @@ const PYRE_SOUTH_ID             = 3
 
 module.exports = function CorsairMemes (dispatch) {		
 	const command = dispatch.command;	
-	let config = loadJson(configJsonPath);	
+	let config = loadJson(configJsonPath);
 	config.instantClimbThreshold = Math.min(99, Math.max(0, Math.floor(config.instantClimbThreshold))); // recommend setting this at or below 95 to avoid any funny behaviours/animations at the top of the ladder.	
 	let currentZone = -1;
 	let myGameId = -1;	
@@ -236,7 +236,7 @@ module.exports = function CorsairMemes (dispatch) {
 		try {
 			let data = JSON.parse(fs.readFileSync(filePath, "utf8"));
 			if (!data){
-				logMessage(`Error loading JSON at ${filePath}`, true)				
+				logMessage(`Error loading JSON at ${filePath}`, true)
 			}
 			else{
 				logMessage(`Loaded data from JSON at ${filePath}`, true)
