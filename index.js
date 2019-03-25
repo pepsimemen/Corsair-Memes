@@ -2,17 +2,18 @@ const fs                        = require('fs');
 const path                      = require('path');
 const configJsonPath            = path.resolve(__dirname,'config.json');
 const CORSAIRS_BG_ZONE          = 116
-const LOCATION_CRYSTAL_BACK     = { x: 13131, y: 120654, z: 2134 }
-const LOCATION_CRYSTAL_FRONT    = { x: 12878, y: 120365, z: 2134 }
-const LOCATION_LEFT_CANNON      = { x: 12896, y: 120082, z: 2113 }
-const LOCATION_RIGHT_CANNON     = { x: 12399, y: 120440, z: 2110 }
-const LOCATION_INNER_GATE_BACK  = { x: 11811, y: 119358, z: 2121 }
-const LOCATION_PYRE_NORTH       = { x: 11149, y: 113126, z: 1900 }
-const LOCATION_PYRE_MID         = { x: 10228, y: 117796, z: 2688 }
-const LOCATION_PYRE_SOUTH       = { x: 5338, y: 118544, z: 1884 }
+const LOCATION_CRYSTAL_BACK     = { x: 13131, y: 120654, z: 2150 }
+const LOCATION_CRYSTAL_FRONT    = { x: 12878, y: 120365, z: 2150 }
+const LOCATION_LEFT_CANNON      = { x: 12896, y: 120082, z: 2125 }
+const LOCATION_RIGHT_CANNON     = { x: 12399, y: 120440, z: 2125 }
+const LOCATION_INNER_GATE_BACK  = { x: 11811, y: 119358, z: 2150 }
+const LOCATION_PYRE_NORTH       = { x: 11149, y: 113126, z: 1925 }
+const LOCATION_PYRE_MID         = { x: 10228, y: 117796, z: 2700 }
+const LOCATION_PYRE_SOUTH       = { x: 5338, y: 118544, z: 1900 }
 const PYRE_MID_ID               = 1
 const PYRE_NORTH_ID             = 2
 const PYRE_SOUTH_ID             = 3
+const TELEPORT_RANDOM_XY		= 50
 
 module.exports = function CorsairMemes (dispatch) {		
 	const command = dispatch.command;	
@@ -49,39 +50,39 @@ module.exports = function CorsairMemes (dispatch) {
 				break;
 			// Crystal room locations. :hue:
 			case 'crystalback':
-				teleport(LOCATION_CRYSTAL_BACK);
+				teleport(LOCATION_CRYSTAL_BACK, TELEPORT_RANDOM_XY);
 				break;
 			case 'crystalfront':			
-				teleport(LOCATION_CRYSTAL_FRONT);
+				teleport(LOCATION_CRYSTAL_FRONT, TELEPORT_RANDOM_XY);
 				break;
 			case 'leftcannon':
-				teleport(LOCATION_LEFT_CANNON);
+				teleport(LOCATION_LEFT_CANNON, TELEPORT_RANDOM_XY);
 				break;
 			case 'rightcannon':
-				teleport(LOCATION_RIGHT_CANNON);
+				teleport(LOCATION_RIGHT_CANNON, TELEPORT_RANDOM_XY);
 				break;
 			case 'innergate':
-				teleport(LOCATION_INNER_GATE_BACK);
+				teleport(LOCATION_INNER_GATE_BACK, TELEPORT_RANDOM_XY);
 				break;
 			// Various pyre locations.
 			case 'northpyre':	
-				teleport(LOCATION_PYRE_NORTH);
+				teleport(LOCATION_PYRE_NORTH, TELEPORT_RANDOM_XY);
 				break;
 			case 'midpyre':
-				teleport(LOCATION_PYRE_MID);
+				teleport(LOCATION_PYRE_MID, TELEPORT_RANDOM_XY);
 				break;
 			case 'southpyre':
-				teleport(LOCATION_PYRE_SOUTH);
+				teleport(LOCATION_PYRE_SOUTH, TELEPORT_RANDOM_XY);
 				break;
 			// Who's a good boy? Definitely not you! :Evil:
 			case 'capnorth':
-				capPyre(PYRE_NORTH_ID);
+				capPyre(PYRE_NORTH_ID, TELEPORT_RANDOM_XY);
 				break;
 			case 'capmid':
-				capPyre(PYRE_MID_ID);
+				capPyre(PYRE_MID_ID, TELEPORT_RANDOM_XY);
 				break;
 			case 'capsouth':
-				capPyre(PYRE_SOUTH_ID);
+				capPyre(PYRE_SOUTH_ID, TELEPORT_RANDOM_XY);
 				break;
 			// QoL :)
 			case 'help':
@@ -147,7 +148,7 @@ module.exports = function CorsairMemes (dispatch) {
 		// IMPORTANT: if however you still end up with a climbing animation because you set instantClimbThreshold configuration setting too close to 100 (anything above 95, really), then you will still be able
 		// to jump & cast skills during the animation (which will break you out of the animation), but you will not be able to move normally using WASD keys until the animation ends (or you break it with a skill).
 		if (blockClimbing){
-			teleport(climbDestination, false);
+			teleport(climbDestination, 0, false);
 			return false;
 		}
 		else{
@@ -182,17 +183,28 @@ module.exports = function CorsairMemes (dispatch) {
 	}
 	
 	// Now you see me... now you d... psst, over here!
-	function teleport(newLocation, checkZone = true) {
+	function teleport(newLocation, randomXY = 0, checkZone = true) {
 		if (checkZone && currentZone != CORSAIRS_BG_ZONE){
 			logMessage(`You are not in Corsairs Stronghold!`);
 			return;
 		}
+		
+		let modLoc = {};
+		Object.assign(modLoc, newLocation);
+		if (randomXY > 0){
+			modLoc.x = getRandom(modLoc.x, randomXY);
+			modLoc.y = getRandom(modLoc.y, randomXY);
+		}
 		// Leggo do the thing! The thing, i say! The thing!
 		dispatch.toClient('S_INSTANT_MOVE', 3, {
 			gameId: myGameId,
-			loc: newLocation,
+			loc: modLoc,
 			w: 0
 		});
+	}
+	
+	function getRandom(base, variance){
+		return base + (Math.random() * 2 * variance) - variance;
 	}
 	
 	// Smh
