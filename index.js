@@ -13,7 +13,7 @@ const LOCATION_PYRE_SOUTH       = { x: 5338, y: 118544, z: 1900 }
 const PYRE_MID_ID               = 1
 const PYRE_NORTH_ID             = 2
 const PYRE_SOUTH_ID             = 3
-const TELEPORT_RANDOM_XY		= 50
+const TELEPORT_RANDOM_XY        = 50
 
 module.exports = function CorsairMemes (dispatch) {		
 	const command = dispatch.command;	
