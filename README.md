@@ -17,8 +17,8 @@ This Tera-Proxy QoL module allows you to:
 ## Setup:
 - Copy/paste all .def files from the protocol folder inside `<path to proxy>\node_modules\tera-data\protocol\`.
 - Copy/paste the opcodes (as appropriate to your region) from the map folder into the corresponding .map file within `<path to proxy>\node_modules\tera-data\map\`.
-  - C_BROADCAST_CLIMBING
-  - C_BATTLE_FIELD_START_OCCUPATION
+  - C_BROADCAST_CLIMBING (packet sent by client while you're moving up/down on a ladder)
+  - C_BATTLE_FIELD_START_OCCUPATION (packet sent by client when you initiate a capture on a battleground pyre in Corsairs / Fraywind)
 - Note: if opcodes are not provided for your region (and patch), you can log them yourself with tools such as https://github.com/Owyn/alex-packet-id-finder or https://github.com/Owyn/PacketsLogger.
 - Enjoy the memes!
 
