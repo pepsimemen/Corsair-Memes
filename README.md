@@ -11,6 +11,7 @@ This Tera-Proxy QoL module allows you to:
 - Tested on Caali's proxy only.
 - Opcodes provided for patch **80.04**:
   - **EU** (protocol 345887)
+  - **NA** (protocol 345886)
 
 ## Setup:
 - Copy/paste all .def files from the protocol folder inside `<path to proxy>\node_modules\tera-data\protocol\`.
