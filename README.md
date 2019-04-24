@@ -6,6 +6,9 @@ This Tera-Proxy QoL module allows you to:
 - Instantly finish ladder climbing (without a locked animation at the end), upon reaching the configured percentage (e.g. 90% up the ladder).
 - Teleport to various locations within the defending crystal room with a single command.
 - Magically capture pyres from anywhere on the map (functionally a "battleground capper").
+  - If you do not wish for your capture score to be excessively high, halt the capture action when the pyre is almost captured (points are only awarded on full capture of the pyre).
+
+You (as the user of this content) are solely responsible for your own actions and any consequences resulting from them.
 
 ## Proxy compatibility:
 - Tested on Caali's proxy only.
