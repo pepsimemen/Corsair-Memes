@@ -13,8 +13,8 @@ You (as the user of this content) are solely responsible for your own actions an
 ## Proxy compatibility:
 - Tested on Caali's proxy only.
 - Opcodes provided for patch **80.05** (both regions are currently using the same protocol version):
-  - **EU** (protocol 344895)
-  - **NA** (protocol 344895)
+  - **EU** (patch **81.03**, protocol version 347373)
+  - **NA** (patch **80.05**, protocol version 344895)
 
 ## Setup:
 - Copy/paste all .def files from the protocol folder inside `<path to proxy>\node_modules\tera-data\protocol\`.
