@@ -1,3 +1,7 @@
+const LOG_CONSOLE_ONLY = 0;
+const LOG_COMMAND_ONLY = 1;
+const LOG_ALL = 2;
+
 const fs                        = require('fs');
 const path                      = require('path');
 const configJsonPath            = path.resolve(__dirname,'config.json');
@@ -162,7 +166,7 @@ module.exports = function CorsairMemes (dispatch) {
 		blockClimbing = false;
 	}
 	
-	// :Zzz:
+	// :MonkaSleep:
 	function resetClimbingState() {
 		stopAtZ = undefined;
 		climbDestination = undefined;
@@ -203,21 +207,14 @@ module.exports = function CorsairMemes (dispatch) {
 		});
 	}
 	
+	// Smh
 	function getRandom(base, variance){
 		return base + (Math.random() * 2 * variance) - variance;
 	}
 	
-	// Smh
+	// Smhmh
 	function isNumber(value) {
 		return !isNaN(parseFloat(value)) && !isNaN(value - 0) 
-	}
-	
-	// What do we want? Logs! Where do we want them? Everywhere!
-	function logMessage(msg, logToConsole = false) {
-		if (logToConsole) {
-			console.log(`[Corsair-Memes] ${msg}`);
-		}
-		command.message(msg);
 	}
 	
 	// :PepeZzZ:
@@ -248,15 +245,15 @@ module.exports = function CorsairMemes (dispatch) {
 		try {
 			let data = JSON.parse(fs.readFileSync(filePath, "utf8"));
 			if (!data){
-				logMessage(`Error loading JSON at ${filePath}`, true)
+				logMessage(`Error loading JSON at ${filePath}`, LOG_CONSOLE_ONLY)
 			}
 			else{
-				logMessage(`Loaded data from JSON at ${filePath}`, true)
+				logMessage(`Loaded data from JSON at ${filePath}`, LOG_CONSOLE_ONLY)
 			}
 			return data ? data : {};
 		}
 		catch (err) {
-			logMessage(`Error loading JSON at ${filePath}!`, true)
+			logMessage(`Error loading JSON at ${filePath}!`, LOG_CONSOLE_ONLY)
 			return {}
 		}
 	}
@@ -264,11 +261,30 @@ module.exports = function CorsairMemes (dispatch) {
 	function saveJson(data, path) {
 		fs.writeFile(path, JSON.stringify(data, null, '\t'), 'utf8', function (err) {
 			if (!err){
-				logMessage(`The JSON at ${path} has been successfully updated.`, true)
+				logMessage(`The JSON at ${path} has been successfully updated.`, LOG_CONSOLE_ONLY)
 			}
 			else{
-				logMessage(`Error writing to ${path}!`, true)
+				logMessage(`Error writing to ${path}!`, LOG_CONSOLE_ONLY)
 			}
 		});
+	}
+	
+	// What do we want? Logs! Where do we want them? Everywhere!
+	function logMessage(message, logState = LOG_COMMAND_ONLY){
+		switch(logState){
+			case LOG_COMMAND_ONLY:
+				command.message(message);
+				break;
+			case LOG_CONSOLE_ONLY:
+				console.log(message);
+				break;
+			case LOG_ALL:
+				command.message(message);
+				console.log(message);
+				break;
+			default:
+				console.log(message);
+				break;
+		}
 	}
 }
