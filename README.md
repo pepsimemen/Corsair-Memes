@@ -2,7 +2,7 @@
 
 By: Cattalol
 
-This Tera-Proxy QoL module allows you to:
+This Tera-Toolbox / Tera-Proxy QoL module allows you to:
 - Instantly finish ladder climbing (without a locked animation at the end), upon reaching the configured percentage (e.g. 90% up the ladder).
 - Teleport to various locations within the defending crystal room with a single command.
 - Magically capture pyres from anywhere on the map (functionally a "battleground capper").
@@ -13,11 +13,11 @@ You (as the user of this content) are solely responsible for your own actions an
 ## Proxy compatibility:
 - Tested on Caali's proxy only.
 - Opcodes provided for:
-  - **EU** (patch **81.03**, protocol version 347373)
-  - **NA** (patch **81.03**, protocol version 347372)
+  - **EU** (patch **81.03**, [protocol version 347373](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347372.map))
+  - **NA** (patch **81.03**, [protocol version 347372](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347373.map))
 
 ## Setup:
-- Copy/paste all .def files from the protocol folder inside `<path to proxy>\node_modules\tera-data\protocol\`.
+- Copy/paste all .def files from the [protocol folder](https://github.com/CattaLol/Corsair-Memes/tree/master/protocol) to `<path to proxy>\node_modules\tera-data\protocol\`.
 - Copy/paste the opcodes (as appropriate to your region) from the map folder into the corresponding .map file within `<path to proxy>\node_modules\tera-data\map\`.
   - C_BROADCAST_CLIMBING
     - Packet sent by client while you're moving up/down on a ladder
