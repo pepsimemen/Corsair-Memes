@@ -13,8 +13,8 @@ You (as the user of this content) are solely responsible for your own actions an
 ## Proxy compatibility:
 - Tested on Caali's proxy only.
 - Opcodes provided for:
-  - **EU** (patch **81.03**, [protocol version 347373](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347372.map))
-  - **NA** (patch **81.03**, [protocol version 347372](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347373.map))
+  - **EU** (patch **81.03**, [protocol version 347373](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347373.map))
+  - **NA** (patch **81.03**, [protocol version 347372](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347372.map))
 
 ## Setup:
 - Copy/paste all .def files from the [protocol folder](https://github.com/CattaLol/Corsair-Memes/tree/master/protocol) to `<path to proxy>\node_modules\tera-data\protocol\`.
