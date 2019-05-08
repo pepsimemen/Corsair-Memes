@@ -12,7 +12,7 @@ You (as the user of this content) are solely responsible for your own actions an
 
 ## Proxy compatibility:
 - Tested on Caali's proxy only.
-- Opcodes provided for patch **80.05** (both regions are currently using the same protocol version):
+- Opcodes provided for:
   - **EU** (patch **81.03**, protocol version 347373)
   - **NA** (patch **81.03**, protocol version 347372)
 
