@@ -15,7 +15,7 @@ You (as the user of this content) are solely responsible for your own actions an
 - Opcodes provided for:
   - **EU** (patch **81.03**, [protocol version 347373](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347373.map))
   - **NA** (patch **81.03**, [protocol version 347372](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347372.map))
-  - **RU** (patch **82.5**, [protocol version 350024](https://github.com/PinguinRei/Corsair-Memes/blob/master/map/protocol.350024.map))
+  - **RU** (patch **82.05**, [protocol version 350024](https://github.com/PinguinRei/Corsair-Memes/blob/master/map/protocol.350024.map))
   
 ## Setup:
 - Copy/paste all .def files from the [protocol folder](https://github.com/CattaLol/Corsair-Memes/tree/master/protocol) to `<path to proxy>\node_modules\tera-data\protocol\`.
