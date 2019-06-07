@@ -15,14 +15,14 @@ You (as the user of this content) are solely responsible for your own actions an
 - Opcodes provided for:
   - **EU** (patch **82.05**, [protocol version 350022](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.350022.map))
   - **NA** (patch **81.03**, [protocol version 347372](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347372.map))
-  - **RU** (patch **81.03**, [protocol version 347375](https://github.com/PinguinRei/Corsair-Memes/blob/master/map/protocol.347375.map), courtesy of [PinguinRei](https://github.com/PinguinRei))
-  
+  - **RU** (patch **82.05**, [protocol version 350024](https://github.com/PinguinRei/Corsair-Memes/blob/master/map/protocol.350024.map), courtesy of [PinguinRei](https://github.com/PinguinRei))
+
 ## Setup:
 - Copy/paste all .def files from the [protocol folder](https://github.com/CattaLol/Corsair-Memes/tree/master/protocol) to `<path to proxy>\node_modules\tera-data\protocol\`.
 - Copy/paste the opcodes (as appropriate to your region) from the map folder into the corresponding .map file within `<path to proxy>\node_modules\tera-data\map\`.
   - C_BROADCAST_CLIMBING
     - Packet sent by client while you're moving up/down on a ladder
-  - C_BATTLE_FIELD_START_OCCUPATION 
+  - C_BATTLE_FIELD_START_OCCUPATION
     - Packet sent by client when you initiate a capture on a battleground pyre in Corsairs / Fraywind
 - Note: if opcodes are not provided for your region (and patch), you can log them yourself with tools such as https://github.com/Owyn/alex-packet-id-finder or https://github.com/Owyn/PacketsLogger.
 - Enjoy the memes!
@@ -31,11 +31,11 @@ You (as the user of this content) are solely responsible for your own actions an
 ### csmemes help
 - Prints (in the proxy channel, and in the proxy console) the list of available commands for this mod.
 ### csmemes instantclimb [percentage - optional]
-- If no percentage is given, toggles instant ladder climbing on/off. 
+- If no percentage is given, toggles instant ladder climbing on/off.
 - If percentage is given, this sets the **percentage height at which you will be automatically teleported to the top of the ladder**. For any value above 95, you will probably encounter a minor desync, in which you will go through
 the finish-climbing-animation (and unable to use WASD to move freely), but you will be free to jump or cast skills (in which case the animation breaks and you will have full freedom of movement immediately).
    - Example: *csmemes instantclimb 99* will finish your climb when you're at the top of the ladder, with a client-sided animation that you can get out of with any skill or jump.
-   - Example: *csmemes instantclimb 50* will finish your climb when you're halfway up the ladder, 
+   - Example: *csmemes instantclimb 50* will finish your climb when you're halfway up the ladder,
    - Example: *csmemes instantclimb 0* will instant-finish your climb as soon as you begin to climb up.
 ### csmemes crystalback
 - Teleports behind the crystal (anchorstone) in the defending castle.
