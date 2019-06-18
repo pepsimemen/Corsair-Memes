@@ -14,7 +14,7 @@ You (as the user of this content) are solely responsible for your own actions an
 - Tested on Caali's proxy only.
 - Opcodes provided for:
   - **EU** (patch **82.05**, [protocol version 350022](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.350022.map))
-  - **NA** (patch **81.03**, [protocol version 347372](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.347372.map))
+  - **NA** (patch **82.05**, [protocol version 350027](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.350027.map))
   - **RU** (patch **82.05**, [protocol version 350024](https://github.com/PinguinRei/Corsair-Memes/blob/master/map/protocol.350024.map), courtesy of [PinguinRei](https://github.com/PinguinRei))
 
 ## Setup:
