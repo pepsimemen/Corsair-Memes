@@ -80,13 +80,13 @@ module.exports = function CorsairMemes (dispatch) {
 				break;
 			// Who's a good boy? Definitely not you! :Evil:
 			case 'capnorth':
-				capPyre(PYRE_NORTH_ID, TELEPORT_RANDOM_XY);
+				capPyre(PYRE_NORTH_ID);
 				break;
 			case 'capmid':
-				capPyre(PYRE_MID_ID, TELEPORT_RANDOM_XY);
+				capPyre(PYRE_MID_ID);
 				break;
 			case 'capsouth':
-				capPyre(PYRE_SOUTH_ID, TELEPORT_RANDOM_XY);
+				capPyre(PYRE_SOUTH_ID);
 				break;
 			// QoL :)
 			case 'help':
