@@ -13,8 +13,9 @@ You (as the user of this content) are solely responsible for your own actions an
 ## Proxy compatibility:
 - Tested on Caali's proxy only.
 - Opcodes provided for:
-  - **EU** (patch **82.05**, [protocol version 350022](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.350022.map))
-  - **NA** (patch **82.05**, [protocol version 350027](https://github.com/CattaLol/Corsair-Memes/blob/master/map/protocol.350027.map))
+  - **EU** (patch **83.07**, [protocol version 353338 (full opcode list)](https://github.com/tera-proxy/tera-data/blob/master/map/protocol.353338.map))
+  - **NA** (patch **83.07**, [protocol version 353337 (full opcode list)](https://github.com/tera-proxy/tera-data/blob/master/map/protocol.353337.map))
+  - **SEA** (patch **83.07**, [protocol version 353339 (full opcode list)](https://github.com/tera-proxy/tera-data/blob/master/map/protocol.353339.map))
   - **RU** (patch **82.05**, [protocol version 350024](https://github.com/PinguinRei/Corsair-Memes/blob/master/map/protocol.350024.map), courtesy of [PinguinRei](https://github.com/PinguinRei))
 
 ## Setup:
