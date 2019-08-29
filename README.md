@@ -16,7 +16,7 @@ You (as the user of this content) are solely responsible for your own actions an
   - **EU** (patch **85.06**, [protocol version 354496 (full opcode list)](https://github.com/tera-proxy/tera-data/blob/master/map/protocol.354496.map))
   - **NA** (patch **85.06**, [protocol version 354502 (full opcode list)](https://github.com/tera-proxy/tera-data/blob/master/map/protocol.354502.map))
   - **SEA** (patch **83.07**, [protocol version 353339 (full opcode list)](https://github.com/tera-proxy/tera-data/blob/master/map/protocol.353339.map))
-  - **RU** (patch **82.05**, [protocol version 350024](https://github.com/PinguinRei/Corsair-Memes/blob/master/map/protocol.350024.map), courtesy of [PinguinRei](https://github.com/PinguinRei))
+  - **RU** (patch **83.07**, [protocol version 353342 (full opcode list)](https://github.com/tera-proxy/tera-data/blob/master/map/protocol.353342.map))
 
 ## Setup:
 - Copy/paste all .def files from the [protocol folder](https://github.com/CattaLol/Corsair-Memes/tree/master/protocol) to `<path to proxy>\node_modules\tera-data\protocol\`.
